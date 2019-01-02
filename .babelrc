@@ -1,0 +1,11 @@
+{
+    "presets": ["env"],
+    "plugins": [
+        ["module-resolver", {
+            "alias": {
+                "routes": "./src/routes"
+            }
+        }],
+        "babel-polyfill"
+    ]
+}

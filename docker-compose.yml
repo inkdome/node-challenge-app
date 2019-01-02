@@ -1,0 +1,9 @@
+version: '3'
+services:
+  mongo:
+    build:
+      context: docker
+      dockerfile: Dockerfile
+    image: inkdome-mongo
+    ports:
+    - "27017:27017"

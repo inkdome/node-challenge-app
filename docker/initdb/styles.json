@@ -1,0 +1,25 @@
+{"_id":{"$oid":"5a7f900cf2a90fa21d06200f"},"name":"geometric","__v":0,"image":"https://inkbot.inkdome.com/images/styles/GEOMETRICO.jpg","description":"","showName":"GEOMETRICO"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062013"},"name":"dotwork","__v":0,"image":"https://inkbot.inkdome.com/images/styles/DOTWORK.jpg","description":"","showName":"DOTWORK"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062014"},"name":"mandala","__v":0,"image":"https://inkbot.inkdome.com/images/styles/MANDALA.jpg","description":"","showName":"MANDALA"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062015"},"name":"ornamental","__v":0,"image":"https://inkbot.inkdome.com/images/styles/ORNAMENTALI.jpg","description":"","showName":"ORNAMENTALI"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d06201a"},"name":"blackworks","__v":0,"image":"https://inkbot.inkdome.com/images/styles/BLACKWORKS.jpg","description":"","showName":"BLACKWORKS"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d06201b"},"name":"blackworksLight","__v":0,"image":"https://inkbot.inkdome.com/images/styles/BLACKWORKS_LIGHT.jpg","description":"","showName":"BLACKWORKS LIGHT"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d06201c"},"name":"waterColor","__v":0,"image":"https://inkbot.inkdome.com/images/styles/WATERCOLOR.jpg","description":"","showName":"WATERCOLOR"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d06201d"},"name":"traditionalColor","__v":0,"image":"https://inkbot.inkdome.com/images/styles/TRADITIONAL_COLORATO.jpg","description":"","showName":"TRADITIONAL COLORATO"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062022"},"name":"traditionalBlack","__v":0,"image":"https://inkbot.inkdome.com/images/styles/TRADITIONAL_BLACK.jpg","description":"","showName":"TRADITIONAL NERO"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062025"},"name":"realisticColor","__v":0,"image":"https://inkbot.inkdome.com/images/styles/REALISTICO_COLORATO.jpg","description":"","showName":"REALISTICO COLORATO"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062027"},"name":"japanese","__v":0,"image":"https://inkbot.inkdome.com/images/styles/GIAPPONESE.jpg","description":"","showName":"GIAPPONESE"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062029"},"name":"realisticBlack","__v":0,"image":"https://inkbot.inkdome.com/images/styles/REALISTICO_BN.jpg","description":"","showName":"REALISTICO NERO"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d06202b"},"name":"toon","__v":0,"image":"https://inkbot.inkdome.com/images/styles/TOON.jpg","description":"","showName":"TOON"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d06202d"},"name":"newSchool","__v":0,"image":"https://inkbot.inkdome.com/images/styles/NEW_SCHOOL.jpg","description":"","showName":"NEW SCHOOL"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d06202f"},"name":"neoTraditional","__v":0,"image":"https://inkbot.inkdome.com/images/styles/NEO_TRADITIONAL.jpg","description":"","showName":"NEO TRADITIONAL"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062031"},"name":"sketch","__v":0,"image":"https://inkbot.inkdome.com/images/styles/SKETCH.jpg","description":"","showName":"SKETCH"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062033"},"name":"lettering","__v":0,"image":"https://inkbot.inkdome.com/images/styles/LETTERING.jpg","description":"","showName":"LETTERING"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062035"},"name":"minimal","__v":0,"image":"https://inkbot.inkdome.com/images/styles/MINIMALE.jpg","description":"","showName":"MINIMALE"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062037"},"name":"trashPolka","__v":0,"image":"https://inkbot.inkdome.com/images/styles/TRASH_POLKA.jpg","description":"","showName":"TRASH POLKA"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062038"},"name":"botanical","__v":0,"image":"https://inkbot.inkdome.com/images/styles/BOTANICAL.jpg","description":"","showName":"BOTANICAL"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d062039"},"name":"mixGeometric","__v":0,"image":"https://inkbot.inkdome.com/images/styles/MIX_GEOMETRICO.jpg","description":"","showName":"MIX GEOMETRICO"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d06203b"},"name":"abstract","__v":0,"image":"https://inkbot.inkdome.com/images/styles/ASTRATTO.jpg","description":"","showName":"ASTRATTO"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d06203c"},"name":"maori","__v":0,"image":"https://inkbot.inkdome.com/images/styles/POLINESIANI_MAORI.jpg","description":"","showName":"POLINESIANI/MAORI"}
+{"_id":{"$oid":"5a7f900cf2a90fa21d06203d"},"name":"outline","__v":0,"image":"https://inkbot.inkdome.com/images/styles/OUTLINE.jpg","description":"","showName":"OUTLINE"}
+{"_id":{"$oid":"5a7f9792f2a90fa21d062176"},"name":"cover","__v":0,"image":"https://inkbot.inkdome.com/images/styles/COVER_UP.jpg","description":"","showName":"COVER UP"}
