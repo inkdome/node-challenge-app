@@ -1,4 +1,4 @@
-## Node test app
+## Inkdome challenge app
 
 This is a skeleton of a node.js basic app using:
 - Express
