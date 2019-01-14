@@ -1,6 +1,8 @@
 export default ({
-  getMongooseErrors, Ranking, getDuplicateError, getRankingConsistencyError
+  getMongooseErrors, Ranking, sanitize, getDuplicateError, getConsistencyError
 }) => async (req, res) => {
+  req.body = sanitize(req.body)
+
   /*
   Not using Mongoose validation by design, as it should concern a single path (field)
   while this concerns both province and style.
@@ -28,18 +30,10 @@ export default ({
       }
     }
 
-    if (req.body.tattooers) {
-      req.body.tattooers = req.body.tattooers.map(t => Object.assign(t, {
-        _id: new ObjectId()
-      }))
+    const rankingConsistencyError = getConsistencyError(req.body)
 
-      // Ranking consistency check!
-      const ranking = req.body.tattooers.map(({ ranking }) => parseInt(ranking))
-      const rankingConsistencyError = getRankingConsistencyError(ranking)
-
-      if (rankingConsistencyError) {
-        return res.status(422).send(rankingConsistencyError)
-      }
+    if (rankingConsistencyError) {
+      return res.status(422).send(rankingConsistencyError)
     }
 
     // TODO: check that style and tattooers exist?

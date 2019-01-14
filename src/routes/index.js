@@ -2,9 +2,9 @@ import { Router } from 'express'
 import { Types } from 'mongoose'
 
 import getMongooseErrors from '../misc/getMongooseErrors'
-import { Style, Ranking } from '../models'
-import makeGetDuplicateError from './ranking/make-getDuplicateError'
-import getRankingConsistencyError from './ranking/getRankingConsistencyError'
+import makeSanitizeRanking from './ranking/make-sanitize'
+import makeGetRankingDuplicateError from './ranking/make-getDuplicateError'
+import getRankingConsistencyError from './ranking/getConsistencyError'
 
 import makeStyle from './style/make-index'
 import makeCreateStyle from './style/make-createStyle'
@@ -18,18 +18,28 @@ import makeGetRanking from './ranking/make-getRanking'
 import makeUpdateRanking from './ranking/make-updateRanking'
 import makeDeleteRanking from './ranking/make-deleteRanking'
 
+const ObjectId = Types.ObjectId
 const createStyle = makeCreateStyle({ getMongooseErrors, Style })
 const getStyle = makeGetStyle({ getMongooseErrors, Style })
 const updateStyle = makeUpdateStyle({ getMongooseErrors, Style })
 const deleteStyle = makeDeleteStyle({ getMongooseErrors, Style })
 
-const getDuplicateError = makeGetDuplicateError({ Ranking })
+const sanitizeRanking = makeSanitizeRanking({ ObjectId })
+const getRankingDuplicateError = makeGetRankingDuplicateError({ Ranking })
 const createRanking = makeCreateRanking({
-  getMongooseErrors, Ranking, getDuplicateError, getRankingConsistencyError, ObjectId: Types.ObjectId
+  getMongooseErrors,
+  Ranking,
+  sanitize: sanitizeRanking,
+  getDuplicateError: getRankingDuplicateError,
+  getConsistencyError: getRankingConsistencyError
 })
 const getRanking = makeGetRanking({ getMongooseErrors, Ranking })
 const updateRanking = makeUpdateRanking({
-  getMongooseErrors, Ranking, getDuplicateError, getRankingConsistencyError
+  getMongooseErrors,
+  Ranking,
+  sanitize: sanitizeRanking,
+  getDuplicateError: getRankingDuplicateError,
+  getConsistencyError: getRankingConsistencyError
 })
 const deleteRanking = makeDeleteRanking({ getMongooseErrors, Ranking })
 

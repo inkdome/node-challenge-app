@@ -1,7 +1,7 @@
 export default ({
-  getMongooseErrors, Ranking, getDuplicateError, getRankingConsistencyError, ObjectId
+  getMongooseErrors, Ranking, sanitize, getDuplicateError, getConsistencyError
 }) => async (req, res) => {
-  req.body.province = (req.body.province.toString() || '').toUpperCase()
+  req.body = sanitize(req.body)
 
   /*
   Not using Mongoose validation by design, as it should concern a single path (field)
@@ -14,14 +14,7 @@ export default ({
       return res.status(409).send(duplicateError)
     }
 
-    req.body.tattooers = (Array.from(req.body.tattooers || [])
-    .map(t => Object.assign(t, {
-      _id: new ObjectId()
-    })))
-
-    // Ranking consistency check!
-    const ranking = req.body.tattooers.map(({ ranking }) => parseInt(ranking))
-    const rankingConsistencyError = getRankingConsistencyError(ranking)
+    const rankingConsistencyError = getConsistencyError(req.body)
 
     if (rankingConsistencyError) {
       return res.status(422).send(rankingConsistencyError)
@@ -34,6 +27,7 @@ export default ({
       await new Ranking(req.body).save()
     )
   } catch (ex) {
+    console.log(ex)
     return res.status(422).send({
       errors: getMongooseErrors(ex)
     })
