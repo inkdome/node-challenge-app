@@ -16,10 +16,12 @@ export default ({ Tattooer, ObjectId }) => async (req, res) => {
     $match = {
       $or: [
         Object.assign({}, $match, {
-          'worksIn.province': req.query.province.toUpperCase()
+          'worksIn.province': req.query.province.toUpperCase(),
+          'worksIn.enabled': true
         }),
         Object.assign({}, $match, {
-          'worksIn.secondaryProvinces': req.query.province.toUpperCase()
+          'worksIn.secondaryProvinces': req.query.province.toUpperCase(),
+          'worksIn.enabled': true
         })
       ]
     }
