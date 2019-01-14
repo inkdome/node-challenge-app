@@ -29,6 +29,10 @@ export default ({
     }
 
     if (req.body.tattooers) {
+      req.body.tattooers = req.body.tattooers.map(t => Object.assign(t, {
+        _id: new ObjectId()
+      }))
+
       // Ranking consistency check!
       const ranking = req.body.tattooers.map(({ ranking }) => parseInt(ranking))
       const rankingConsistencyError = getRankingConsistencyError(ranking)
