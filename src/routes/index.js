@@ -3,9 +3,11 @@ import { Types } from 'mongoose'
 
 import getMongooseErrors from '../misc/getMongooseErrors'
 import { Style, Ranking, Tattooer } from '../models'
+
 import makeSanitizeRanking from './ranking/make-sanitize'
 import makeGetRankingDuplicateError from './ranking/make-getDuplicateError'
 import getRankingConsistencyError from './ranking/getConsistencyError'
+
 import makeSanitizeTattooer from './tattooer/make-sanitize'
 import makeGetTattooerDuplicateError from './tattooer/make-getDuplicateError'
 import getTattooerConsistencyError from './tattooer/getConsistencyError'
@@ -27,6 +29,7 @@ import makeCreateTattooer from './tattooer/make-createTattooer'
 import makeGetTattooer from './tattooer/make-getTattooer'
 import makeUpdateTattooer from './tattooer/make-updateTattooer'
 import makeDeleteTattooer from './tattooer/make-deleteTattooer'
+import makeFindTattooers from './tattooer/make-findTattooer'
 
 const ObjectId = Types.ObjectId
 
@@ -72,6 +75,7 @@ const updateTattooer = makeUpdateTattooer({
   getConsistencyError: getTattooerConsistencyError
 })
 const deleteTattooer = makeDeleteTattooer({ getMongooseErrors, Tattooer })
+const findTattooers = makeFindTattooers({ Tattooer, ObjectId })
 
 module.exports.setRoutes = (app) => {
   app
@@ -82,6 +86,6 @@ module.exports.setRoutes = (app) => {
     Router, createRanking, getRanking, updateRanking, deleteRanking
   }))
   .use('/tattooers', makeTattooer({
-    Router, createTattooer, getTattooer, updateTattooer, deleteTattooer
+    Router, createTattooer, getTattooer, updateTattooer, deleteTattooer, findTattooers
   }))
 }
