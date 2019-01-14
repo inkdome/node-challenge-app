@@ -1,4 +1,8 @@
 export default ({ Ranking }) => async ranking => {
+  if (!ranking.province && !ranking.style) {
+    return null
+  }
+
   ranking.province = (ranking.province.toString() || '').toUpperCase()
 
   const duplicate = await Ranking.findOne({
