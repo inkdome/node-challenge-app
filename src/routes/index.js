@@ -3,6 +3,7 @@ import { Types } from 'mongoose'
 
 import getMongooseErrors from '../misc/getMongooseErrors'
 import { Style, Ranking, Tattooer } from '../models'
+import authenticate from '../misc/authenticate'
 
 import makeSanitizeRanking from './ranking/make-sanitize'
 import makeGetRankingDuplicateError from './ranking/make-getDuplicateError'
@@ -79,13 +80,13 @@ const findTattooers = makeFindTattooers({ Tattooer, ObjectId })
 
 module.exports.setRoutes = (app) => {
   app
-  .use('/styles', makeStyle({
+  .use('/styles', authenticate, makeStyle({
     Router, createStyle, getStyle, updateStyle, deleteStyle
   }))
-  .use('/rankings', makeRanking({
+  .use('/rankings', authenticate, makeRanking({
     Router, createRanking, getRanking, updateRanking, deleteRanking
   }))
-  .use('/tattooers', makeTattooer({
+  .use('/tattooers', authenticate, makeTattooer({
     Router, createTattooer, getTattooer, updateTattooer, deleteTattooer, findTattooers
   }))
 }
