@@ -1,34 +1,36 @@
 export default ({ Tattooer, ObjectId }) => async (req, res) => {
-  let $match = {}
+  let $tattooersMatch = {}
   const aggregation = []
 
   if (req.query.bw) {
     const bw = req.query.bw === 'true' ? true : false
-    $match.bw = bw
+    $tattooersMatch.bw = bw
   }
 
   if (req.query.color) {
     const color = req.query.color === 'true' ? true : false
-    $match.color = color
+    $tattooersMatch.color = color
   }
 
   if (req.query.province) {
-    $match = {
+    req.query.province = req.query.province.toUpperCase()
+
+    $tattooersMatch = {
       $or: [
-        Object.assign({}, $match, {
-          'worksIn.province': req.query.province.toUpperCase(),
+        Object.assign({}, $tattooersMatch, {
+          'worksIn.province': req.query.province,
           'worksIn.enabled': true
         }),
-        Object.assign({}, $match, {
-          'worksIn.secondaryProvinces': req.query.province.toUpperCase(),
+        Object.assign({}, $tattooersMatch, {
+          'worksIn.secondaryProvinces': req.query.province,
           'worksIn.enabled': true
         })
       ]
     }
   }
 
-  if (Object.keys($match)) {
-    aggregation.push({ $match })
+  if (Object.keys($tattooersMatch)) {
+    aggregation.push({ $match: $tattooersMatch })
   }
 
   aggregation.push({
@@ -42,13 +44,20 @@ export default ({ Tattooer, ObjectId }) => async (req, res) => {
     $unwind: '$rankings'
   })
 
-  if (req.query.style) {
-    const style = new ObjectId(req.query.style)
+  const $worksInMatch = {}
 
+  if (req.query.province) {
+    // Already uppercased
+    $worksInMatch['rankings.province'] = req.query.province
+  }
+
+  if (req.query.style) {
+    $worksInMatch['rankings.style'] = new ObjectId(req.query.style)
+  }
+
+  if (Object.keys($worksInMatch)) {
     aggregation.push({
-      $match: {
-        'rankings.style': style
-      }
+      $match: $worksInMatch
     })
   }
 
