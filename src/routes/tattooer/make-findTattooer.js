@@ -31,22 +31,57 @@ export default ({ Tattooer, ObjectId }) => async (req, res) => {
     aggregation.push({ $match })
   }
 
+  aggregation.push({
+    $lookup: {
+      from: 'rankings',
+      localField: '_id',
+      foreignField: 'tattooers.tattooer',
+      as: 'rankings'
+    }
+  }, {
+    $unwind: '$rankings'
+  })
+
   if (req.query.style) {
-    const style = new ObjectId(style)
+    const style = new ObjectId(req.query.style)
 
     aggregation.push({
-      $lookup: {
-        from: 'rankings',
-        localField: '_id',
-        foreignField: 'tattooers.tattooer',
-        as: 'rankings'
-      }
-    }, {
-      $project: {
-        rankings: false
+      $match: {
+        'rankings.style': style
       }
     })
   }
+
+  aggregation.push({
+    // Isolate the single tattooer/ranking duplets
+    $unwind: '$rankings.tattooers'
+  }, {
+    // Create a field that compares the tattooer/ranking duplets with the tattooer's _id
+    $addFields: {
+      ownRanking: {
+        $cmp: ['$rankings.tattooers.tattooer', '$_id']
+      }
+    }
+  }, {
+    // Filter the ranking for this tattooer
+    $match: {
+      ownRanking: 0
+    }
+  }, {
+    // In case there is not a style filter, compute the avg
+    // This way we sort tattooers by average ranking
+    $group: {
+      _id: '$_id',
+      avgRanking: {
+        $avg: '$rankings.tattooers.ranking'
+      }
+    }
+  }, {
+    // Freaking sort
+    $sort: {
+      avgRanking: 1
+    }
+  })
 
   if (req.query.perPage && req.query.page) {
     const perPage = parseInt(req.query.perPage)
@@ -59,5 +94,23 @@ export default ({ Tattooer, ObjectId }) => async (req, res) => {
     })
   }
 
-  return res.send(await Tattooer.aggregate(aggregation).exec())
+  // Recover data
+  aggregation.push({
+    $lookup: {
+      from: 'tattooers',
+      localField: '_id',
+      foreignField: '_id',
+      as: 'data'
+    }
+  })
+
+  return res.send(
+    (await Tattooer.aggregate(aggregation).exec())
+    // Extract data back to root level
+    .map(tattooer => {
+      tattooer = Object.assign(tattooer, tattooer.data[0])
+      delete tattooer.data
+      return tattooer
+    })
+  )
 }
